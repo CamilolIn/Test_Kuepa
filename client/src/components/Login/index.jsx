@@ -84,6 +84,7 @@ const Login = () =>  {
             <Button variant="dark" type="submit">
                  {loading ? <Spinner color="ligth"/> : "Submit"} 
             </Button>
+            <p onClick={() => history.push('/register')} className={s.parrLog__Reg}>Registro</p>
             </Form>
             </Container>
         </div>

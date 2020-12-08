@@ -74,6 +74,14 @@
     background-position: center;
 }
 
+.parrLog__Reg {
+    font-size: 12px;
+    color: gray;
+    text-align: center;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
 .title{
     text-align: center;
     letter-spacing: 1px;

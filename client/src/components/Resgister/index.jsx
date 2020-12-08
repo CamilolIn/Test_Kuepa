@@ -42,7 +42,12 @@ const Resgister = () =>  {
                 text:"ahora ya puedes iniciar sesion",
                 icon: "success"
             })
-            history.push('/login')
+            setValues({
+                name: '',
+                email: '',
+                phone: '',
+                password: ''
+            });
         }, 3000);
 
     }
@@ -56,27 +61,28 @@ const Resgister = () =>  {
         <h2 className={s.title}>REGISTRO</h2>
         <Form.Group controlId="formBasicEmail">
             <Form.Label>Nombre</Form.Label> 
-            <Form.Control type="text" placeholder="Tu nombre" name="name" onChange={handleChange} />
+            <Form.Control type="text" placeholder="Tu nombre" name="name" value={values.name} onChange={handleChange} />
         </Form.Group>
         <Form.Group controlId="formBasicEmail">
             <Form.Label>Email</Form.Label>
-            <Form.Control type="email" placeholder="Tu Email" name ="email" onChange={handleChange} />
+            <Form.Control type="email" placeholder="Tu Email" name ="email" value={values.email} onChange={handleChange} />
         </Form.Group>
 
         <Form.Group controlId="formBasicPassword">
             <Form.Label>Telefono</Form.Label>
-            <Form.Control type="number" placeholder="Telefono"  name="phone" onChange={handleChange} />
+            <Form.Control type="number" placeholder="Telefono"  name="phone" value={values.phone} onChange={handleChange} />
         </Form.Group>
 
         <Form.Group controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" name ="password" onChange={handleChange} />
+            <Form.Control type="password" placeholder="Password" name ="password" value={values.password} onChange={handleChange} />
         </Form.Group>
 
 
         <Button variant="dark" type="submit">
             {loading ? <Spinner color="ligth"/> : "Registrar"} 
         </Button>
+        <p onClick={() => history.push('/login')} className={s.parrLog__Reg}>Login</p>
         </Form>
         </Container>
     </div>
