@@ -5,17 +5,41 @@ const app = express();
 const passport = require('passport')
 const session = require('express-session')
 const http = require('http')
-const server = http.createServer(app)
-const socketio = require('socket.io')
-const io = socketio(server)
 var cors = require('cors')
 
+app.use(cors())
+const server = http.createServer(app)
+const io = require('socket.io')(server, {
+  cors: {
+    origin: '*',
+  }
+});
+// const io = socketio(server)
+
 /*******************Configuracion Socketio********************** */
-io.on('connection', socket => {
-  socket.on('conectado', () => {
-    console.log('Useuario conectado')
+io.on("connection", socket => {
+
+let nombre;
+
+  socket.on('conectado', (nomb)=> {
+    nombre=nomb
+    console.log("Useario Conectado", nombre);
+    io.emit('mensajes',  {servidor: 'Servidor', mensaje: ''+ nombre+' ha ingresado a la sala'})
   })
-})
+
+  socket.on('mensaje', (nombre, mensaje) => {
+    io.emit('mensajes', {
+      nombre,
+      mensaje
+    })
+  })
+
+  socket.on('disconnect', () => {
+    io.emit('mensajes', {servidor: 'Servidor', mensaje: ''+ nombre+' ha abandonado la sala'})
+  } )
+
+  
+});
 
 /*******************Configuracion Passport********************** */
 require('./src/passport/auth')

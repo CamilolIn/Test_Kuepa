@@ -1,5 +1,4 @@
 import React,{ useState, useEffect }  from 'react'
-import AddCurso from '../Modales/AddCursos';
 import Navigation from '../Nav/index'
 import s from '../../styles/addAdminCursos.module.css';
 import {Button, Modal, Form, Container, Table } from 'react-bootstrap';
