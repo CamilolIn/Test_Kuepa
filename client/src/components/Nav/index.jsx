@@ -38,7 +38,7 @@ const Navigation = ({nameUser, role, id}) =>  {
     
      <Navbar bg="dark" variant="dark" className={s.navHome}>
     <Container>
-     <Navbar.Brand href='#' as={Link} to='/'><h4>SPIRA<span className={s.point__title}>.</span>CO</h4></Navbar.Brand>
+     <Navbar.Brand href='#' as={Link} to='/'><h4>KUEPA<span className={s.point__title}>.</span>CO</h4></Navbar.Brand>
      <Nav className="mr-auto">
 
      </Nav>
@@ -50,19 +50,17 @@ const Navigation = ({nameUser, role, id}) =>  {
      </Nav>
      </Container>
     </Navbar>:
-        userssLog && userssLog.role === "admin" ?
+        userssLog && userssLog.role === "moderador" ?
         <Navbar bg="dark" variant="dark" className={s.navHome}>
         <Container>
-        <Navbar.Brand href='#' as={Link} to='/'><h4>SPIRA<span className={s.point__title}>.</span>CO</h4></Navbar.Brand>
+        <Navbar.Brand href='#' ><h4>KUEPA<span className={s.point__title}>.</span>CO</h4></Navbar.Brand>
         <Nav className="mr-auto">
 
-        <Nav.Link href='#' as={Link} to='/cursos'>Cursos</Nav.Link>
-        <Nav.Link href='#' as={Link} to='/users'>Users</Nav.Link>
 
         </Nav>
         <Nav inline>
 
-            <Nav.Link href='#' as={Link} to='/login'> Hello {session.userLog.name}</Nav.Link>
+            <Nav.Link href='#' as={Link} to='/login'> Hello {session.userLog.role}</Nav.Link>
             <Nav.Link href='#' as={Link} to='/' onClick={logoutP}> Logout </Nav.Link>
         </Nav>
         </Container>
@@ -71,10 +69,9 @@ const Navigation = ({nameUser, role, id}) =>  {
         userssLog && userssLog.role === "user" ?
         <Navbar bg="dark" variant="dark" className={s.navHome}>
         <Container>
-        <Navbar.Brand href='#' as={Link} to='/'><h4>SPIRA<span className={s.point__title}>.</span>CO</h4></Navbar.Brand>
+        <Navbar.Brand href='#' ><h4>KUEPA<span className={s.point__title}>.</span>CO</h4></Navbar.Brand>
         <Nav className="mr-auto">
 
-        <Nav.Link href='#' as={Link} to={`/detailuser/${userssLog.id}`}>Mi cursos</Nav.Link>
         
 
         </Nav>
@@ -88,7 +85,7 @@ const Navigation = ({nameUser, role, id}) =>  {
         :
         <Navbar bg="dark" variant="dark" className={s.navHome}>
         <Container>
-        <Navbar.Brand href='#' as={Link} to='/'><h4>SPIRA<span className={s.point__title}>.</span>CO</h4></Navbar.Brand>
+        <Navbar.Brand href='#' ><h4>KUEPA<span className={s.point__title}>.</span>CO</h4></Navbar.Brand>
         <Nav className="mr-auto">
 
         

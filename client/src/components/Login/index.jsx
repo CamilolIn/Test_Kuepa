@@ -8,6 +8,7 @@ import axios from 'axios';
 import {Spinner} from 'reactstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import s from '../../styles/login.module.css';
+import swal from 'sweetalert'
 
 
 
@@ -37,7 +38,11 @@ const Login = () =>  {
             }
             return history.push('/userPage');
         }else{
-            alert("User or pasword incorrect")
+            swal({
+                title:"Error al iniciar session",
+                text:'Verifica tu usuario o tu contraseña',
+                icon: "error"
+            })
             return history.push('/login');
         }
     }
@@ -63,6 +68,7 @@ const Login = () =>  {
             <Container className={s.cont__form___Princ}>
             <div className={s.cont__form_image}></div>
             <Form onSubmit={handlerSubmit} className={s.cont__form}>
+            <h2 className={s.title}>LOGIN</h2>
             <Form.Group controlId="formBasicEmail">
                 <Form.Label>Email</Form.Label>
                 <Form.Control type="email" placeholder="Enter email" name="email" onChange={handleChange}/>

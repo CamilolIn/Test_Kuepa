@@ -5,9 +5,12 @@ import { createUser } from '../../store/actions/userActions'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom';
 import s from '../../styles/login.module.css';
+import {Spinner} from 'reactstrap';
+import swal from 'sweetalert'
 
 
 const Resgister = () =>  {
+    const [loading, setLoading] = useState(false)
     const [values, setValues] = useState({
         name: '',
         email: '',
@@ -28,15 +31,29 @@ const Resgister = () =>  {
 
     const handlerSubmit = (e) => {
         e.preventDefault();
-        dispacth(createUser(values))
-        history.push('/login')
+        setLoading(true)
+        setTimeout(async() => {
+            setLoading(false)
+            await dispacth(createUser(values))
+        }, 2000);
+        setTimeout(async() => {
+            swal({
+                title:"Resgitro existoso",
+                text:"ahora ya puedes iniciar sesion",
+                icon: "success"
+            })
+            history.push('/login')
+        }, 3000);
+
     }
 
     return (
         <div>
         <Navigation/>
-        <Container className={s.cont__form___Princ}>
-        <Form onSubmit={handlerSubmit} className={s.cont__form}>
+        <Container className={s.cont__form___Princ_reg}>
+        <div className={s.cont__form_image_reg}></div>
+        <Form onSubmit={handlerSubmit} className={s.cont__form_reg}>
+        <h2 className={s.title}>REGISTRO</h2>
         <Form.Group controlId="formBasicEmail">
             <Form.Label>Nombre</Form.Label> 
             <Form.Control type="text" placeholder="Tu nombre" name="name" onChange={handleChange} />
@@ -48,7 +65,7 @@ const Resgister = () =>  {
 
         <Form.Group controlId="formBasicPassword">
             <Form.Label>Telefono</Form.Label>
-            <Form.Control type="number" placeholder="Password"  name="phone" onChange={handleChange} />
+            <Form.Control type="number" placeholder="Telefono"  name="phone" onChange={handleChange} />
         </Form.Group>
 
         <Form.Group controlId="formBasicPassword">
@@ -57,8 +74,8 @@ const Resgister = () =>  {
         </Form.Group>
 
 
-        <Button variant="primary" type="submit">
-            Submit
+        <Button variant="dark" type="submit">
+            {loading ? <Spinner color="ligth"/> : "Registrar"} 
         </Button>
         </Form>
         </Container>

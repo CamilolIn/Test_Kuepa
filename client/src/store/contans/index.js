@@ -1,9 +1,7 @@
 export const CREATE_USER = 'CREATE_USER';
 export const LOGIN = 'LOGIN';
-export const  GET_CURSOS = 'GET_CURSOS'
-export const ADD_CURSO = 'ADD_CURSO'
+export const ADD_MENSAJE = 'ADD_MENSAJE'
 export const GET_USERS = 'GET_USERS'
 export const ADD_USERS = 'ADD_USERS'
-export const ADD_CURSO_USER = 'ADD_CURSO_USER'
 export const GET_USER_ID = 'GET_USER_ID'
 export const LOGOUT = 'LOGOUT'

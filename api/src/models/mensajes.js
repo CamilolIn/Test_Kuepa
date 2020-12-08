@@ -5,23 +5,22 @@ const S = Sequelize;
 const {User} = require('./user')
  
 
-const Cursos = db.define('cursos', {
-    name:{
+const Mensajes = db.define('mensajes', {
+    mensajeData:{
       type: DataTypes.TEXT,
       allowNull: false,
-      unique:true
     },
-    intensidad: {
+    from: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
 
 },{
-  timestamps: false
+  timestamps: true
 });
 
-User.belongsToMany(Cursos, { through: 'User_Curso' });
-Cursos.belongsToMany(User, { through: 'User_Curso' });
+User.belongsToMany(Mensajes, { through: 'User_Mensaje' });
+Mensajes.belongsToMany(User, { through: 'User_Mensaje' });
 
 
-module.exports = {Cursos}
+module.exports = {Mensajes}

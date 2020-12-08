@@ -3,10 +3,22 @@ import Socket from './Socket';
 import { Card, Button, Form, Container, Col, Row } from 'react-bootstrap';
 import socket from './Socket';
 import s from '../../styles/chat.module.css'
+import { createMensaje } from '../../store/actions/mensjesActions';
+import { useSelector, useDispatch } from 'react-redux';
 
-const Chat = ({nombre}) => {
+
+const Chat = ({nombre, role}) => {
     const [mensaje, setMesanje] = useState("")
     const [mensajes, setMesanjes] = useState([])
+    const [mensajeDB, setMensajeDB] = useState({
+        mensajeData:"",
+        from: nombre
+    })
+    const dispacth = useDispatch()
+    const divRef = useRef(null)
+    useEffect(() => {
+        divRef.current.scrollIntoView({behavior : 'smooth'})
+    })
 
     useEffect(()=> {
         socket.emit('conectado', nombre)
@@ -19,10 +31,18 @@ const Chat = ({nombre}) => {
         return ()=>  {socket.off()}
     }, [mensajes]);
 
+    const handlerChange = (e) => {
+        setMesanje(e.target.value)
+        setMensajeDB({...mensajeDB, mensajeData:e.target.value})
+        return
+    }
+
     const submit = (e)=> {
         e.preventDefault();
         socket.emit('mensaje', nombre, mensaje)
         setMesanje('')
+        dispacth(createMensaje(mensajeDB))
+        return
     }
 
     console.log(mensajes)
@@ -35,15 +55,16 @@ const Chat = ({nombre}) => {
                     <>
                     {
                        m.servidor ?<div><p className={s.pMensaje}> { m.mensaje}</p></div>:
-                       <div><p className={s.parr, s.pNombre}>{m.nombre} </p>  <p className={s.parr, s.pMensaje}>{m.mensaje}</p> </div>
+                       <div><p className={s.parr, s.pNombre}>{} {m.nombre} dice: </p>  <p className={s.parr, s.pMensaje}>{m.mensaje}</p> </div>
                     }
 
                 </>
                 )
             })}
+            <div ref={divRef}></div>
         </div>
             <form onSubmit={submit} className={s.form__cont}>
-                <textarea name="" id="" cols="30" rows="10" value={mensaje} onChange={e => setMesanje(e.target.value)} placeholder='Tu mensaje...'></textarea>
+                <textarea name="" id="" cols="30" rows="10" value={mensaje} onChange={handlerChange} placeholder='Tu mensaje...'></textarea>
                 <div className={s.cont_form__button}>
                 <Button className={s.form__button} variant="dark" type='submit'>Enviar</Button>
                 </div>
