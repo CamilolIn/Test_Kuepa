@@ -1,7 +1,9 @@
 var Sequelize = require('sequelize');
 var DataTypes = Sequelize.DataTypes;
 const S = Sequelize;
-var db = new Sequelize('postgres://postgres:102627912ca@localhost:5433/kuepadb', {
+const {DB_PASSWORD, DB_HOST, DB_USER} = require('../env')
+
+var db = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/kuepadb`, {
   logging: false,
 });
 

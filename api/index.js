@@ -16,6 +16,7 @@ const io = require('socket.io')(server, {
 });
 // const io = socketio(server)
 
+
 /*******************Configuracion Socketio********************** */
 io.on("connection", socket => {
 
