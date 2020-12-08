@@ -38,11 +38,11 @@ const Chat = ({nombre, role}) => {
     }
 
     const submit = (e)=> {
-        e.preventDefault();
-        socket.emit('mensaje', nombre, mensaje)
-        setMesanje('')
-        dispacth(createMensaje(mensajeDB))
-        return
+            e.preventDefault();
+            socket.emit('mensaje', nombre, mensaje)
+            setMesanje('')
+            dispacth(createMensaje(mensajeDB))
+            return 
     }
 
     console.log(mensajes)
@@ -55,7 +55,7 @@ const Chat = ({nombre, role}) => {
                     <>
                     {
                        m.servidor ?<div><p className={s.pMensaje}> { m.mensaje}</p></div>:
-                       <div><p className={s.parr, s.pNombre}>{} {m.nombre} dice: </p>  <p className={s.parr, s.pMensaje}>{m.mensaje}</p> </div>
+                       <div><p className={s.parr, s.pNombre}>{} {m.nombre === nombre ? "Tu dices": m.nombre + " dice"} </p>  <p className={s.parr, s.pMensaje}>{m.mensaje}</p> </div>
                     }
 
                 </>
